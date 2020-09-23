@@ -1,7 +1,15 @@
 pipeline{
     agent any
+    parameters {
+        booleanParam(name: 'executeTests', defaultValue: true, description:'')
+    }
     stages{
         stage("test"){
+            when {
+                expression {
+                    params.executeTests
+                }
+            }
             steps{
                 echo "========executing test ========"
             }

@@ -4,6 +4,9 @@ pipeline{
         booleanParam(name: 'executeTests', defaultValue: true, description:'')
     }
     stages{
+        stage("init"){
+            gv = load "script.groovy"
+        }
         stage("test"){
             when {
                 expression {
@@ -11,12 +14,13 @@ pipeline{
                 }
             }
             steps{
-                echo "========executing test ========"
+                gv.testApp()
             }
         }
         stage("build"){
             steps{
                 echo "========executing build ========"
+                gv.buildApp();
             }
         }
         stage("deploy"){

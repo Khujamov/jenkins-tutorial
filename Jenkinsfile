@@ -1,9 +1,13 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image: 'maven:3.6.3-jdk-11'
+        }
+    }
     stages {
         stage('Test') {
             steps {
-                sh 'echo "Fail!"; exit 1'
+                sh 'mvn --version'
             }
         }
     }

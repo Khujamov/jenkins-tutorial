@@ -6,6 +6,9 @@ pipeline {
         }
     }
     environment {
+        // credentials() --> for secret text/ username and password/ secret file
+        AWS_ACCESS_KEY_ID     = credentials('jenkins-aws-secret-key-id')
+        AWS_SECRET_ACCESS_KEY = credentials('jenkins-aws-secret-access-key')
         DISABLE_AUTH = 'true'
         DB_ENGINE    = 'sqlite'
     }

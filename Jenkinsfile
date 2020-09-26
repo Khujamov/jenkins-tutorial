@@ -5,10 +5,21 @@ pipeline {
             label 'docker'
         }
     }
+    environment {
+        DISABLE_AUTH = 'true'
+        DB_ENGINE    = 'sqlite'
+    }
     stages {
         stage('Test') {
             steps {
                 sh 'mvn --version'
+            }
+        }
+        stage('Build') {
+            steps {
+                echo "Database engine is ${DB_ENGINE}"
+                echo "DISABLE_AUTH is ${DISABLE_AUTH}"
+                sh 'printenv'
             }
         }
     }
